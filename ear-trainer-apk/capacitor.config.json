@@ -1,0 +1,6 @@
+{
+  "appId": "com.eartrainer.app",
+  "appName": "EarTrainer",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#14161d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>练耳训练</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+  <header id="topbar">
+    <div class="title">🎹 练耳训练</div>
+    <div class="mode" id="modeLabel">旋律序列</div>
+    <div class="score">✅ <b id="scoreOk">0</b> · ❌ <b id="scoreBad">0</b> · 正确率 <b id="scoreRate">—</b></div>
+    <button id="btnSettings" class="chip">⚙️ 设置</button>
+  </header>
+
+  <main id="questionArea">
+    <div id="statusText" class="status">点「播放」听音，然后在键盘上按出来</div>
+    <div class="play-row">
+      <button id="btnPlay" class="btn primary big">▶ 播放</button>
+      <button id="btnNext" class="btn alt big">⏭ 下一题</button>
+    </div>
+    <div id="answerHint" class="hint hidden"></div>
+    <div id="feedback" class="feedback hidden"></div>
+    <div id="actions" class="actions">
+      <button id="btnClear" class="btn ghost" disabled>↺ 清空</button>
+      <button id="btnReveal" class="btn ghost" disabled>👁 答案</button>
+    </div>
+  </main>
+
+  <section id="keyboard" aria-label="钢琴键盘"></section>
+</div>
+
+<!-- 设置面板 -->
+<div id="settingsPanel" class="panel">
+  <div class="panel-head">
+    <span>设置</span>
+    <button id="btnCloseSettings" class="chip">✕</button>
+  </div>
+  <div class="panel-body">
+    <div class="field">
+      <label>练习模式</label>
+      <div class="seg" id="modeSeg">
+        <button data-mode="melody" class="seg-btn">旋律</button>
+        <button data-mode="interval" class="seg-btn">音程</button>
+        <button data-mode="chord" class="seg-btn">和弦</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>音域范围</label>
+      <div class="row">
+        <select id="lowNote"></select>
+        <span class="dash">—</span>
+        <select id="highNote"></select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="switch-row">
+        <span>包含黑键</span>
+        <input type="checkbox" id="blackKeys">
+      </label>
+    </div>
+
+    <div class="field" id="fieldNoteCount">
+      <label id="labelNoteCount">连续出几个音</label>
+      <div class="row">
+        <input type="range" id="noteCount" min="1" max="8" step="1">
+        <span id="noteCountVal" class="range-val">3</span>
+      </div>
+    </div>
+
+    <div class="field" id="melodyDirField">
+      <label>旋律走向</label>
+      <div class="seg" id="melodyDirSeg">
+        <button data-v="up" class="seg-btn">上行</button>
+        <button data-v="down" class="seg-btn">下行</button>
+        <button data-v="mixed" class="seg-btn">混乱</button>
+      </div>
+    </div>
+
+    <div class="field-group hidden" id="intervalFields">
+      <div class="field">
+        <label>音程范围（半音数）</label>
+        <div class="row">
+          <select id="intervalMin"></select>
+          <span class="dash">—</span>
+          <select id="intervalMax"></select>
+        </div>
+      </div>
+      <div class="field">
+        <label>播放方式</label>
+        <div class="seg" id="intervalPlaySeg">
+          <button data-v="up" class="seg-btn">上行</button>
+          <button data-v="down" class="seg-btn">下行</button>
+          <button data-v="together" class="seg-btn">同时</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="field-group hidden" id="chordFields">
+      <label>和弦类型</label>
+      <div class="checks" id="chordChecks"></div>
+    </div>
+
+    <div class="field">
+      <label>播放速度</label>
+      <div class="seg" id="tempoSeg">
+        <button data-v="slow" class="seg-btn">慢</button>
+        <button data-v="medium" class="seg-btn">中</button>
+        <button data-v="fast" class="seg-btn">快</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="switch-row">
+        <span>自动播放下一题</span>
+        <input type="checkbox" id="autoNext">
+      </label>
+    </div>
+
+    <div class="field">
+      <label class="switch-row">
+        <span>显示键名</span>
+        <input type="checkbox" id="showLabels">
+      </label>
+    </div>
+
+    <div class="field">
+      <label>音量</label>
+      <input type="range" id="volume" min="0" max="100" step="1">
+    </div>
+
+    <div class="field">
+      <button id="btnResetScore" class="btn ghost">↺ 重置分数</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/theory.js"></script>
+<script src="js/synth.js"></script>
+<script src="js/keyboard.js"></script>
+<script src="js/questions.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
